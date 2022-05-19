@@ -1,0 +1,129 @@
+create table Prodotto(
+C8 varchar(8) primary key,
+Titolo varchar(10) not null,
+Descrizione varchar(30) not null,
+UrlImmagine varchar(50) not null,
+)
+INSERT INTO Prodotto(C8,Titolo,Descrizione,UrlImmagine)
+VALUES('ABCDEFG1','sedia','sedia di legno','https://kavehome.com/it/it/p/sedia-pieghevoli-da-esterno-daliana-in-legno-massello-di-acacia-fsc-100?utm_source=google&utm_medium=cpc&utm_campaign=6951165758&utm_term=&utm_content=390036967825&gclid=EAIaIQobChMI5-GausHr9wIVjbrtCh3NYwdNEAQYASABEgL2t_D_BwE&gclsrc=aw.ds')
+INSERT INTO Prodotto(C8,Titolo,Descrizione,UrlImmagine)
+VALUES('ABCDEFG2','computer','computer HP','https://www.hp.com/it-it/shop/product.aspx?id=5R4D6EA&opt=ABZ&sel=NTB&gclid=EAIaIQobChMIwdqv2sPr9wIV2t_tCh1NYQ9ZEAQYASABEgIsRPD_BwE&gclsrc=aw.ds')
+INSERT INTO Prodotto(C8,Titolo,Descrizione,UrlImmagine)
+VALUES('ABCDEFG3','cellulare','Samsung','https://www.mediaworld.it/product/p-171349/samsung-galaxy-a13-128gb-light-blue?utm_source=google&utm_medium=cpc&utm_campaign=8.Shopping_Smart_Telefonia&utm_term=&ds_rl=1250284&ds_rl=1293221&ds_rl=1293221&ds_rl=1250284&gclid=EAIaIQobChMIlbm0_cPr9wIVQAIGAB0Z1AAvEAQYASABEgJd-vD_BwE&gclsrc=aw.ds')
+INSERT INTO Prodotto(C8,Titolo,Descrizione,UrlImmagine)
+VALUES('ABCDEFG4','maglietta','maglietta adidas','https://www.zalando.it/adidas-originals-stripes-tee-t-shirt-con-stampa-green-ad1210016-m13.html?size=L&allophones=0&wmc=SEM390_NB_GO._8690582122_674226627_128421856506.&opc=2211&mpp=google|v1||pla-410606134715||1008611||g|c||555733984753||pla|AD1210016-M13000L000|410606134715|1|&gclsrc=aw.ds&gclid=EAIaIQobChMIlNm7s8Tr9wIVkJBoCR1scgQtEAQYAiABEgKEO_D_BwE')
+
+
+create table Paese(
+IdPaese int primary key,
+Nazione varchar(50) not null,
+TipoMoneta varchar(3) not null,
+
+)
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(1,'Italia','Eur')
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(2,'Ecuador','USD')
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(3,'Congo','XAF')
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(4,'Spagna','Eur')
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(5,'Croazia','HRK')
+INSERT INTO Paese(IdPaese,Nazione,TipoMoneta)
+VALUES(6,'Egitto','EGP')
+
+
+
+create table Listino(
+IdListino int primary key,
+Prezzo FLOAT not null,
+IdPaese int not null references Paese,
+C8 varchar (8) not null references Prodotto,
+)
+
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(1,16.90,1,'ABCDEFG1')
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(2,700.00,2,'ABCDEFG2')
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(3,500.00,1,'ABCDEFG2')
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(4,15.50,6,'ABCDEFG4')
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(5,350.60,5,'ABCDEFG3')
+INSERT INTO listino(IdListino,Prezzo,IdPaese,C8)
+VALUES(7,25,2,'ABCDEFG1')
+
+
+create table Customer(
+IdCustomer int primary key,
+Email varchar(30) unique not null,
+Cognome varchar(30) NOT NULL,
+Nome varchar(30)    NOT NULL,
+DataNascita date   NOT NULL,
+
+INSERT INTO Customer(IdCustomer,Email,Cognome,Nome,DataNascita)
+VALUES(1,'RossiGiorgio@gmail.com','Rossi','Giorgio','1996-1-1')
+INSERT INTO Customer(IdCustomer,Email,Cognome,Nome,DataNascita)
+VALUES(2,'BianchiAndrea@gmail.com','Bianchi','Andrea','1995-2-2')
+INSERT INTO Customer(IdCustomer,Email,Cognome,Nome,'DataNascita')
+VALUES(3,'VerdiDiana@gmail.com','Verdi','Diana',1994-3-22)
+INSERT INTO Customer(IdCustomer,Email,Cognome,Nome,'DataNascita')
+VALUES(4,'RossiMattia@gmai.com','Rossi','Mattia',1993-4-4)
+INSERT INTO Customer(IdCustomer,Email,Cognome,Nome,'DataNascita')
+VALUES(5,'DanteLuigi@gmail.com','Dante','luigi',1992-5-10)
+
+
+)
+create table Ordine(
+IdOrdine int primary key,
+DataAcquisto date not null,
+PrezzoOrdine float not null,
+IdCustomer int not null references Customer
+)
+
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(1,'2022-1-2',418.20,1)
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(2,'2021-2-2',65,2)
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(3,'2022-3-2',500,3)
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(4,'2022-4-2',1000,4)
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(5,'2022-2-2',350,5)
+INSERT INTO Ordine(IdOrdine,DataAcquisto,PrezzoOrdine,IdCustomer)
+VALUES(6,'2022-5-2',350,1)
+
+
+create table DettagliOrdine(
+C8 varchar (8) references Prodotto,
+IdOrdine int references Ordine,
+Quantità int not null,
+PRIMARY KEY(C8,IdOrdine) )
+
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG1',1,4)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG1',2,2)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG2',3,1)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG2',4,2)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG3',5,1)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG3',6,1)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG3',1,1)
+INSERT INTO DettagliOrdine(C8,IdOrdine,Quantità)
+VALUES('ABCDEFG4',2,2)
+
+
+
+
+
+
+
+
